@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Lock, Menu, ShoppingCart, X } from "lucide-react";
+import { Download, Lock, Menu, ShoppingCart, X } from "lucide-react";
+import { useInstall } from "./pwa/PWAProvider";
 import { useSettings, useWhatsapp } from "./WhatsappProvider";
 import { OPEN_ADMIN_EVENT } from "./admin/AdminGate";
 import { useCart } from "./shop/CartProvider";
@@ -20,6 +21,7 @@ const links = [
 ];
 
 export default function Header() {
+  const { canInstall, install } = useInstall();
   const [open, setOpen] = useState(false);
   const whatsapp = useWhatsapp();
   const s = useSettings();
@@ -113,6 +115,18 @@ export default function Header() {
               className="block w-full text-left text-brand-textDark font-medium hover:text-brand-blue py-1"
             >
               Acompanhar pedido
+            </button>
+          )}
+          {canInstall && (
+            <button
+              onClick={() => {
+                setOpen(false);
+                install();
+              }}
+              className="w-full flex items-center justify-center gap-2 bg-brand-blue text-white text-sm font-semibold px-4 py-3 rounded-full mt-2"
+            >
+              <Download className="w-4 h-4" />
+              <span>Instalar app</span>
             </button>
           )}
           <button

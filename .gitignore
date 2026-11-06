@@ -1,5 +1,8 @@
 node_modules
 .next
-.env.local
 next-env.d.ts
+
+# Segredos: nunca enviar para o GitHub
 .env
+.env.*
+!.env.example

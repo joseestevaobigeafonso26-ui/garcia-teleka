@@ -63,3 +63,17 @@ No cabeçalho (**Área do Autor**) ou no rodapé (**Área reservada**). Entra s�
 - `components/ui/` — barra de progresso, toasts, janelas
 - `lib/` — Supabase, dados, loja, estados dos pedidos
 - `supabase/` — `schema.sql`, `loja.sql`, `make_admin.sql`
+
+## Instalar como app (PWA)
+
+O site pode ser instalado no telemóvel e no computador:
+
+- **Android / Chrome / Edge**: aparece um convite "Instale o app" e o botão **Instalar app** no menu e no rodapé.
+- **iPhone / iPad**: o botão **Instalar app** mostra o passo a passo (Safari → Partilhar → Adicionar ao ecrã principal).
+- Requer **HTTPS** (Vercel já fornece). O service worker só é ativo em produção (`npm run build && npm start` ou deploy).
+- Ficheiros: `app/manifest.ts`, `public/sw.js`, `public/offline.html`, `public/icons/*`, `components/pwa/PWAProvider.tsx`.
+- Páginas e dados vêm sempre da rede (stock/preços atuais); sem internet mostra uma página "Sem ligação".
+
+## Segurança das chaves
+
+Nunca envie o `.env` para o GitHub (já está no `.gitignore`). Use `.env.local` localmente e as *Environment Variables* na Vercel.

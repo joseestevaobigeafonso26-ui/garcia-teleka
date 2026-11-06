@@ -1,12 +1,14 @@
 "use client";
 
-import { Facebook, Instagram, Lock, MessageCircle, Youtube } from "lucide-react";
+import { Download, Facebook, Instagram, Lock, MessageCircle, Youtube } from "lucide-react";
+import { useInstall } from "./pwa/PWAProvider";
 import { OPEN_ADMIN_EVENT } from "./admin/AdminGate";
 import { OPEN_TRACKER_EVENT } from "./shop/events";
 import { isSupabaseConfigured } from "@/lib/supabase";
 import { useSettings, useWhatsapp } from "./WhatsappProvider";
 
 export default function Footer() {
+  const { canInstall, install } = useInstall();
   const whatsapp = useWhatsapp();
   const s = useSettings();
 
@@ -83,6 +85,14 @@ export default function Footer() {
                 className="hover:text-white transition"
               >
                 Acompanhar pedido
+              </button>
+            )}
+            {canInstall && (
+              <button
+                onClick={() => install()}
+                className="inline-flex items-center gap-1 hover:text-white transition"
+              >
+                <Download className="w-3 h-3" /> Instalar app
               </button>
             )}
             <button
